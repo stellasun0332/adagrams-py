@@ -10,7 +10,8 @@ def draw_letters():
     "S": 4, "T": 6, "U": 4, "V": 2, "W": 2, "X": 1, "Y": 2, "Z": 1}
 
     while len(letter) < 10:
-        pick_letter = random.choice(pool)
+        index = randint(0,len(pool)-1)
+        pick_letter = pool[index]
         if pool_dic[pick_letter]>0: 
             letter.append(pick_letter)
             pool_dic[pick_letter] -= 1
