@@ -1,4 +1,3 @@
-# import random
 from random import randint
 
 LETTER_POOL = {
@@ -29,14 +28,6 @@ LETTER_POOL = {
     'Y': 2, 
     'Z': 1
 }
-
-# create a dictionary include key as letter and number as value
-# use for to loop through the dictianry to get a list of full letters
-# use ranint to get random index
-# get the randome letter
-# append to hand list
-# remove from letter_list
-# loop 10 times
 
 
 def draw_letters():
@@ -89,23 +80,24 @@ def score_word(word):
 
 
 def get_highest_word_score(word_list):
-    get_word_score = {}
     max_score = 0
-    max_key = None
+    max_word = []
+
     for word in word_list:
-        word_score = score_word(word)
-        get_word_score[word] = word_score
+        if score_word(word) > max_score:
+            max_score = score_word(word)
+            max_word = [word]
+        elif score_word(word) == max_score:
+            max_word.append(word)
 
-    for key, value in get_word_score.items():
-        if value > max_score:
-            max_score = value
-            max_key = key
-        elif value == max_score:
-            if len(max_key) == 10:
-                return (max_key, max_score)
-            elif len(key) == 10 or len(key) < len(max_key):
-                max_score = value
-                max_key = key
-    return (max_key, max_score)
-
+    winning_word = max_word[0]
+    for word in max_word:
+        if len(word) == 10:
+            winning_word = word
+            max_score = score_word(word)
+            break
+        elif len(word) < len(winning_word):
+            winning_word = word
+            max_score = score_word(word)
+    return (winning_word, max_score)
 
